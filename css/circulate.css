@@ -1,0 +1,409 @@
+Service and service rates tables
+
+
+
+
+
+
+
+
+
+
+
+
+
+Table. No
+Table Name
+Fields
+Data Types
+Constraint
+PK
+FK
+Foreign Key Mapping
+Description if any
+1.0
+bs_service_categories 
+
+
+
+
+
+this table describes department wise service category details for big screen.
+
+bs_service_category_id 
+bigserial 
+NOT NULL
+YES
+NO
+Primary Key
+
+dept_id 
+bigint
+NOT NULL
+NO
+YES
+hospital_departments (Org DataBase)
+foreign key to hospital_departments table to link service with department
+
+service_category_name 
+character varying(255)
+NOT NULL
+NO
+NO
+It represent the service category name.
+
+record_status  
+character(1)
+NOT NULL
+NO
+NO
+
+This field indicate whether the record is active or deactivate 
+
+gn_field1
+character varying(255)
+
+NO
+NO
+
+These fields are reserved for future use
+
+gn_field2 
+character varying(255)
+
+NO
+NO
+
+
+
+gn_field3 
+character varying(255)
+
+NO
+NO
+
+
+
+gn_field4 
+boolean
+
+NO
+NO
+
+
+
+gn_field5 
+boolean
+
+NO
+NO
+
+
+
+2.0
+bs_services 
+this table describes services with its category_id for big screen.
+
+bs_service_id 
+bigserial 
+NOT NULL
+YES
+NO
+Auto Incremented
+
+bs_service_category_id 
+bigint
+NOT NULL
+NO
+YES
+bs_service_categories (Org DataBase)
+foreign key to bs_service_categories table
+bs_lab_test_id 
+bigint
+NO
+NO
+Link patho test with service (Patho test billing handling)
+room_id
+bigint
+ALLOW NULL
+NO
+YES
+Rooms (Org Databse)
+if the service is room service
+Added Now
+service_name 
+character varying(255)
+NOT NULL
+NO
+NO
+service_code 
+character varying(255)
+NO
+NO
+service_type 
+character varying(5)
+NO
+NO
+whether this service is IPD OR OPD service 
+is_package 
+boolean
+DEFAULT FALSE
+NO
+NO
+It is a boolean field which describes whether this service is a package
+record_status  
+character(1)
+NOT NULL
+NO
+NO
+
+This field indicate whether the record is active or deactivate 
+gn_field1
+character varying(255)
+
+NO
+NO
+
+These fields are reserved for future use
+gn_field2 
+character varying(255)
+
+NO
+NO
+
+
+gn_field3 
+character varying(255)
+
+NO
+NO
+
+
+gn_field4 
+boolean
+
+NO
+NO
+
+
+gn_field5 
+boolean
+
+NO
+NO
+
+
+3.0
+bs_package_services
+this table describes package details with its associate service_id for big screen. 
+
+
+bs_package_services_id 
+bigserial 
+NOT NULL
+YES
+NO
+Auto Incremented
+
+
+bs_package_id 
+bigint
+NOT NULL
+NO
+YES
+bs_services(Org DataBase)
+It represent the package Id Basically it is service_id having is_package flag true because package is one service
+
+
+bs_service_id 
+bigint
+NOT NULL
+NO
+YES
+bs_services(Org DataBase)
+Foreign Key of Table bs_services
+
+
+quantity
+integer
+NO
+NO
+Quantity of the service in this package
+
+
+record_status  
+character(1)
+NOT NULL
+NO
+NO
+
+This field indicate whether the record is active or deactivate 
+
+
+gn_field1
+character varying(255)
+
+NO
+NO
+
+These fields are reserved for future use
+
+
+gn_field2 
+character varying(255)
+
+NO
+NO
+
+
+
+
+gn_field3 
+character varying(255)
+
+NO
+NO
+
+
+
+
+gn_field4 
+boolean
+
+NO
+NO
+
+
+
+
+gn_field5 
+boolean
+
+NO
+NO
+
+
+
+4.0
+bs_service_rates
+
+
+
+
+
+this table describes services rate with respect to room type, patient source,patient company for big screen.
+
+
+bs_service_rate_id
+bigserial 
+NOT NULL
+YES
+NO
+Auto Incremented
+
+
+service_id 
+bigint
+NOT NULL
+NO
+YES
+bs_service(Org DataBase)
+service_id whose rate is this
+
+
+bs_patient_source_id 
+bigint
+NOT NULL
+NO
+YES
+bs_patient_sources(org DataBase)
+patient_source specific rate
+
+
+bs_patient_company_id 
+bigint
+NOT NULL
+NO
+YES
+bs_patient_companies(org DataBase)
+patient_company specific rate
+
+
+doctor_npuid 
+bigint
+
+NO
+YES
+non_patient_users(Master DataBase)
+doctor specific rate
+
+
+room_type_id 
+bigint
+
+NO
+YES
+room_types(Org Database)
+This field is to maintain service rate according to room type (if rates varies according to room types)
+
+
+rate 
+numeric(10,3)
+NOT NULL
+NO
+NO
+Rate of the service 
+
+
+record_status  
+character(1)
+NOT NULL
+NO
+NO
+
+This field indicate whether the record is active or deactivate 
+
+
+gn_field1
+character varying(255)
+
+NO
+NO
+
+These fields are reserved for future use
+
+
+gn_field2 
+character varying(255)
+
+NO
+NO
+
+
+
+
+gn_field3 
+character varying(255)
+
+NO
+NO
+
+
+
+
+gn_field4 
+boolean
+
+NO
+NO
+
+
+
+
+gn_field5 
+boolean
+
+NO
+NO
+
+
